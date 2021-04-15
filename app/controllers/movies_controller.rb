@@ -1,8 +1,6 @@
 class MoviesController < ApplicationController
   def new
     @the_movie = Movie.new
-
-    render template: "movies/new.html.erb"
   end
 
   def index
@@ -16,7 +14,7 @@ class MoviesController < ApplicationController
       end
 
       format.html do
-        render template: "movies/index.html.erb"
+        render template: "movies/index"
       end
     end
   end
@@ -28,7 +26,7 @@ class MoviesController < ApplicationController
 
     @the_movie = matching_movies.first
 
-    render template: "movies/show.html.erb"
+    render template: "movies/show"
   end
 
   def create
@@ -40,7 +38,7 @@ class MoviesController < ApplicationController
       @the_movie.save
       redirect_to(movie_url(@the_movie), { :notice => "Movie created successfully." })
     else
-      render template: "movies/new.html.erb"
+      render template: "new"
     end
   end
 
