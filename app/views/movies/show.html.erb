@@ -12,14 +12,13 @@
       </div>
 
       <div>
-        <a href="/movies/<%= edit_movie_path(@the_movie.id) %>"
-          Edit movie
+         <%= link_to "Edit movie", @the_movie %>
+
         </a>
       </div>
 
       <div>
-        <a href="<%= delete_movie_path(@the_movie.id) %>"
-          Delete movie
+        <%= link_to "Delete movie", @the_movie %>
         </a>
       </div>
     </div>
