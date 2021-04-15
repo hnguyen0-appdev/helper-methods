@@ -14,11 +14,11 @@ Rails.application.routes.draw do
   get "/movies/:id" => "movies#show", as: :movie #movie_path() (expects an argument to populate :id segment)
   
   # UPDATE
-  patch "/movies/:id" => "movies#update"
+  patch "/film/:id" => "movies#update"
   get "/movies/:id/edit" => "movies#edit", as: :edit_movie # edit_movie_path() (expects an argument to populate :id segment)
   
   # DELETE
-  delete "/movies/:id" => "movies#destroy"
+  delete "/movies/:id" => "movies#destroy", as: :delete_movie
 
   #------------------------------
 end
