@@ -4,9 +4,8 @@ class MoviesController < ApplicationController
   end
 
   def index
-    matching_movies = Movie.all
 
-    @list_of_movies = matching_movies.order({ :created_at => :desc })
+    @list_of_movies = Movie.order(created_at: :desc)
 
     respond_to do |format|
       format.json do
@@ -20,19 +19,20 @@ class MoviesController < ApplicationController
   end
 
   def show
-    the_id = params.fetch(:id)
-
-    matching_movies = Movie.where({ :id => the_id })
-
-    @the_movie = matching_movies.first
+    
+  # OlD WAY: matching_movies = Movie.where({ :id => the_id }).first
+  # matching_movies = Movie.find_by({ :id => the_id })
+  
+  # NEW WAY:
+     @the_movie = Movie.find(params.fetch(:id))
 
     render template: "movies/show"
   end
 
   def create
     @the_movie = Movie.new
-    @the_movie.title = params.fetch("query_title")
-    @the_movie.description = params.fetch("query_description")
+    @the_movie.title = params.fetch("title")
+    @the_movie.description = params.fetch("description")
 
     if @the_movie.valid?
       @the_movie.save
@@ -43,11 +43,9 @@ class MoviesController < ApplicationController
   end
 
   def edit
-    the_id = params.fetch(:id)
+    # No longer 3-step method: the_id = params.fetch(:id)
 
-    matching_movies = Movie.where({ :id => the_id })
-
-    @the_movie = matching_movies.first
+    @the_movie = Movie.find(params.fetch(:id))
 
     render template: "movies/edit.html.erb"
   end
@@ -56,8 +54,8 @@ class MoviesController < ApplicationController
     the_id = params.fetch(:id)
     the_movie = Movie.where({ :id => the_id }).first
 
-    the_movie.title = params.fetch("query_title")
-    the_movie.description = params.fetch("query_description")
+    the_movie.title = params.fetch("title")
+    the_movie.description = params.fetch("description")
 
     if the_movie.valid?
       the_movie.save
