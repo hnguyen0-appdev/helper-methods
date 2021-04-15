@@ -10,16 +10,18 @@
 
     <%= label_tag :title, "Title"%>
     
-    <%= text_field_tag :query_title, @the_movie.title, { id: "title"} %>
+    <%= text_field_tag "movie[title]", @the_movie.title, { id: "title"} %>
 
   </div>
 
   <div>
     <%= label_tag :description, "Description"%>
     
-    <%= text_area_tag :query_description, @the_movie.description%>
+    <%= text_area_tag "movie[description]", @the_movie.description%>
   </div>
 
   <%= button_tag "Create movie"%>
 
 <%end%>
+
+
